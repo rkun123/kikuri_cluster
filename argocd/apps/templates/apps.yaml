@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: apps
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/rkun123/kikuri_cluster.git
+    path: argocd/applications/
+    targetRevision: HEAD
+  destination:
+    namespace: argocd
+    server: { { .Values.spec.destination.server } }
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=false
+    automated:
+      selfHeal: false
