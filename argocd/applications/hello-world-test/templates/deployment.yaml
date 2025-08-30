@@ -10,6 +10,9 @@ spec:
     matchLabels:
       app: hello-world-test
   template:
+    metadata:
+      labels:
+        app: hello-world-test
     spec:
       containers:
       - name: nginx
