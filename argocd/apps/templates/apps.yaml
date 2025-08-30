@@ -16,6 +16,7 @@ spec:
     server: {{ .Values.spec.destination.server }}
   syncPolicy:
     syncOptions:
-      - CreateNamespace=false
+      - CreateNamespace=true
     automated:
-      selfHeal: false
+      prune: true
+      selfHeal: true
