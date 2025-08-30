@@ -13,7 +13,7 @@ spec:
     targetRevision: HEAD
   destination:
     namespace: argocd
-    server: { { .Values.spec.destination.server } }
+    server: {{ .Values.spec.destination.server }}
   syncPolicy:
     syncOptions:
       - CreateNamespace=false
