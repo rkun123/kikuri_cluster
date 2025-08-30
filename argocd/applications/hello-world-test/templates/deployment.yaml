@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-test
+  labels:
+    app: hello-world-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-world-test
+  template:
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.15.4
+        ports:
+        - containerPort: 80
