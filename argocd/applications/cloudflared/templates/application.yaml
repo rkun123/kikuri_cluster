@@ -5,13 +5,13 @@ metadata:
   namespace: argocd
 spec:
   project: default
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
   source:
     repoURL: https://github.com/cloudflare/helm-charts.git
     targetRevision: main
     path: charts/cloudflare-tunnel
-    destination:
-      namespace: argocd
-      server: https://kubernetes.default.svc
     helm:
       valuesObject:
         cloudflare:
