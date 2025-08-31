@@ -1,0 +1,2 @@
+cloudflared:
+  secretName: cloudflare
