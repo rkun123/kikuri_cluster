@@ -12,4 +12,4 @@ spec:
     helm:
       valuesObject:
         cloudflared:
-          secretName: {{ .Values.cloudflared.secretName }}
+          secretName: cloudflare
