@@ -15,7 +15,7 @@ spec:
     helm:
       valuesObject:
         cloudflare:
-          secretName: cloudflare
+          secretName: {{ .Values.cloudflared.secretName }}
   syncPolicy:
     automated:
       prune: true
