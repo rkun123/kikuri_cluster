@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: cloudflare
   labels:
-    - cloudflare
+    helm: cloudflare
 spec:
   type: ClusterIP
   ports:

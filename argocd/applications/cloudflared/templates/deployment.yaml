@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: cloudflared
   labels:
-    - cloudflared
+    helm: cloudflared
 spec:
   selector:
     matchLabels:
