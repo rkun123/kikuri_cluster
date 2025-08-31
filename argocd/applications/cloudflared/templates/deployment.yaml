@@ -31,3 +31,10 @@ spec:
                 secretKeyRef:
                   name: cloudflare
                   key: tunnelToken
+          volumeMounts:
+            - mountPath: /etc/cloudflared/cert.pem
+              name: etc-cloudflared-cert
+  volumes:
+    - name: etc-cloudflared-cert
+      secret:
+        secretName: cloudflare-cert
