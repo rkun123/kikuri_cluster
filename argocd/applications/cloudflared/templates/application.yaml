@@ -16,3 +16,8 @@ spec:
       valuesObject:
         cloudflare:
           secretName: cloudflare
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=false
