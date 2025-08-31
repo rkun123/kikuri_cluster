@@ -11,4 +11,5 @@ spec:
     path: charts/cloudflare-tunnel
     helm:
       valuesObject:
-        secretName: {{ .Values.cloudflare.secretName | quote }}
+        cloudflared:
+          secretName: {{ .Values.cloudflared.secretName }}

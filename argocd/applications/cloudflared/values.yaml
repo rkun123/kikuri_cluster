@@ -1,2 +1,2 @@
-cloudflare:
+cloudflared:
   secretName: cloudflare
