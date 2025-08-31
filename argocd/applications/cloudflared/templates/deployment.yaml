@@ -3,15 +3,15 @@ kind: Deployment
 metadata:
   name: cloudflared
   labels:
-    helm: cloudflared
+    app: cloudflared
 spec:
   selector:
     matchLabels:
-      - cloudflared
+      app: cloudflared
   template:
     metadata:
       labels:
-        - cloudflared
+        app: cloudflared
     spec:
       containers:
         - name: cloudflared

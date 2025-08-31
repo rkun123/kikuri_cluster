@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: cloudflare
   labels:
-    helm: cloudflare
+    app: cloudflare
 spec:
   type: ClusterIP
   ports:
@@ -12,4 +12,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    - cloudflare
+    app: cloudflare
