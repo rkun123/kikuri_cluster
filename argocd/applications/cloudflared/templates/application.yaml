@@ -15,7 +15,8 @@ spec:
     helm:
       valuesObject:
         cloudflare:
-          secretName: {{ .Values.cloudflared.secretName }}
+          tunnelName: kikuri
+          secretName: cloudflare
   syncPolicy:
     automated:
       prune: true
