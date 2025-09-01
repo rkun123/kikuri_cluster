@@ -1,0 +1,15 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: musicbot
+  namespace: argocd
+spec:
+  encryptedData:
+    token: AgCPcRKosQ45kYHnQeDJ1NfQp0N4vp/bpDpTKsdAieqNXbmpfA+l5bQCiPS1/N5t3WphEQ5T59UQx6+tTBrkuCvguhjO0dqTwQMCfQMDsiz8GcD8Re6Mc9Ytx/Z6pRpQbAwLk933pF9cHycriMLvykDSdP2RDBlDbdwFk7EkK/krpXiLpvjnrhvC1ZWFJd/8gJwoezq6PWbJFS/Zzm8we//DpMobGGfBRZ9TGDc7TtSQv0Uve1ZR5gA1mE9vnzOOJMmp4BcXpBrL5LVK09If7b3uNtas7r/CJfCvf8KwRkagyZTS7tfBKxFdSZQxFSs+A2rR5dPxqT7eACx1SLGgxVQSCoME5fpHRJZPdCwplaS52OwCn4+umb2tPx2UiOyiZy67Vl3rRfZOpS1AEkEPF3pwMMmfrdvSvT+Wv/gY3ai/wsZGW5xsT/KGbxOdkry208C5w9zJZNbmoIN/BuI6Tky6JQT3tDu0OaucWdy0cdYvdlOp1ZnHrg0CQ1+q3xCVa0ochWXoJwMnaoS6vKu2qL9Tu2xkjaHZsu9s49s7BhbHogxswReaFoQEsmpTjQEpXU7446gZwt9cxAq/JZ/KoHN8YF/EkYa/GEd2y4kNYnNAl19taDdBEhE3wxz5e28bI7+SmfgKo0FT6Y4tbEX4l54DudksCjhRR6FS2VH3ht8BJEzrz0R5e4NWEi/bVWJyROpoEnXJhbfNTBeFyICY4CRf46FANiy/N0Azvgbb/p4S+W+TifuuI/gsO+yxUqd8IIhSZ6g/1f6grTEyiQ==
+  template:
+    metadata:
+      creationTimestamp: null
+      name: musicbot
+      namespace: argocd
