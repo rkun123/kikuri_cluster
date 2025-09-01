@@ -1,0 +1,24 @@
+apiVersion: v1
+data:
+  config.txt: "/////////////////////////////////////////////////////////\n// Config
+    for the JMusicBot                            //\n/////////////////////////////////////////////////////////\n//
+    Any line starting with // is ignored                //\n// You MUST set the token
+    and owner                    //\n// All other items have defaults if you don't
+    set them //\n// Open in Notepad++ for best results                  //\n/////////////////////////////////////////////////////////\ntoken
+    = ${TOKEN}\nowner = ${OWNER}\nprefix = \"!\"\ngame = \"DEFAULT\"\nsonginstatus
+    = true\naltprefix = \"NONE\"\nsuccess = \"\U0001F3B6\"\nwarning = \"\U0001F4A1\"\nerror
+    = \"\U0001F6AB\"\nloading = \"⌚\"\nsearching = \"\U0001F50E\"\nhelp = help\nnpimages
+    = false\nstayinchannel = false\nmaxtime = 0\nmaxytplaylistpages = 10\nskipratio
+    = 0.55\nalonetimeuntilstop = 0\nplaylistsfolder = \"Playlists\"\nupdatealerts=true\nlyrics.default
+    = \"A-Z Lyrics\"\naliases {\n  settings = [ status ]\n  lyrics = []\n  nowplaying
+    = [ np, current ]\n  play = []\n  playlists = [ pls ]\n  queue = [ list ]\n  remove
+    = [ delete ]\n  scsearch = []\n  search = [ ytsearch ]\n  shuffle = []\n  skip
+    = [ voteskip ]\n  prefix = [ setprefix ]\n  setdj = []\n  setskip = [ setskippercent,
+    skippercent, setskipratio ]\n  settc = []\n  setvc = []\n  forceremove = [ forcedelete,
+    modremove, moddelete, modelete ]\n  forceskip = [ modskip ]\n  movetrack = [ move
+    ]\n  pause = []\n  playnext = []\n  queuetype = []\n  repeat = []\n  skipto =
+    [ jumpto ]\n  stop = [ leave ]\n  volume = [ vol ]\n}\nloglevel = info\ntransforms
+    = {}\neval=false\nevalengine=\"Nashorn\""
+kind: ConfigMap
+metadata:
+  name: musicbot
