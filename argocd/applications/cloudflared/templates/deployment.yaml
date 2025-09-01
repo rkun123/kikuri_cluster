@@ -17,6 +17,13 @@ spec:
         - name: cloudflared
           image: cloudflare/cloudflared
           imagePullPolicy: IfNotPresent
+          command:
+            - cloudflared
+            - tunnel
+            - --no-autoupdate
+            - --metrics
+            - 0.0.0.0:2000
+            - run
           ports:
             - name: http
               containerPort: 8080
