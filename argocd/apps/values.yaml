@@ -1,0 +1,24 @@
+config:
+  spec:
+    destination:
+      server: https://kubernetes.default.svc
+    source:
+      repoURL: https://github.com/argoproj/argocd-example-apps
+      targetRevision: master
+
+applications:
+  - name: cloudflared
+    path: applications/cloudflared
+    tool:
+      helm:
+        releaseName: cloudflared
+  - name: hello-world-test
+    path: applications/hello-world-test
+    tool:
+      helm:
+        releaseName: hello-world-test
+  - name: neguko
+    path: applications/neguko
+    tool:
+      helm:
+        releaseName: neguko
