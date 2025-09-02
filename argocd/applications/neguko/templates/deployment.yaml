@@ -27,6 +27,17 @@ spec:
                   key: token
             - name: OWNER
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   name: musicbot
                   key: owner
+          volumeMounts:
+            - mountPath: /musicbot/config.txt
+              name: config.txt
+              subPath: config.txt
+      volumes:
+        - name: config.txt
+          configMap:
+            name: musicbot
+            items:
+            - key: config.txt
+              path: config.txt

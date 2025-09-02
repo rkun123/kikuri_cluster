@@ -1,4 +1,8 @@
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: musicbot
+  namespace: argocd
 data:
   config.txt: "/////////////////////////////////////////////////////////\n// Config
     for the JMusicBot                            //\n/////////////////////////////////////////////////////////\n//
@@ -19,7 +23,3 @@ data:
     ]\n  pause = []\n  playnext = []\n  queuetype = []\n  repeat = []\n  skipto =
     [ jumpto ]\n  stop = [ leave ]\n  volume = [ vol ]\n}\nloglevel = info\ntransforms
     = {}\neval=false\nevalengine=\"Nashorn\""
-kind: ConfigMap
-metadata:
-  name: musicbot
-  namespace: argocd
