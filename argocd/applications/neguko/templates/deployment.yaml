@@ -31,7 +31,7 @@ spec:
                   name: musicbot
                   key: owner
           volumeMounts:
-            - mountPath: /musicbot/config.txt
+            - mountPath: /jmusicbot/config.txt
               name: config
               subPath: config.txt
       volumes:
