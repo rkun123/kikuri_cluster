@@ -18,6 +18,7 @@ spec:
       containers:
         - name: wave-exploder
           image: ghcr.io/rkun123/wave-exploder
+          tag: main
           imagePullPolicy: IfNotPresent
           env:
             - name: TOKEN
