@@ -32,10 +32,10 @@ spec:
                   key: owner
           volumeMounts:
             - mountPath: /musicbot/config.txt
-              name: config.txt
+              name: config
               subPath: config.txt
       volumes:
-        - name: config.txt
+        - name: config
           configMap:
             name: musicbot
             items:
