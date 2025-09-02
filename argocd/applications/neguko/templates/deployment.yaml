@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "neguko.fullname" . }}
+  namespace: {{ .Values.namespace }}
   labels:
     {{- include "neguko.labels" . | nindent 4 }}
 spec:
@@ -34,23 +35,17 @@ spec:
       {{- end }}
       containers:
         - name: {{ .Chart.Name }}
+          namespace: {{ .Values.namespace }}
           {{- with .Values.securityContext }}
           securityContext:
             {{- toYaml . | nindent 12 }}
           {{- end }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- with .Values.env }}
           env:
-            - name: TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: musicbot
-                  key: token
-            - name: OWNER
-              valueFrom:
-                configMapKeyRef:
-                  name: musicbot
-                  key: owner
+            {{- toYaml . | nindent 12}}
+          {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}

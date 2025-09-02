@@ -13,6 +13,8 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "0.10.2"
 
+namespace: argocd
+
 # This is for the secrets for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
 imagePullSecrets: []
 # This is to override the chart name.
@@ -22,7 +24,7 @@ fullnameOverride: ""
 # This section builds out the service account more information can be found here: https://kubernetes.io/docs/concepts/security/service-accounts/
 serviceAccount:
   # Specifies whether a service account should be created
-  create: true
+  create: false
   # Automatically mount a ServiceAccount's API credentials?
   automount: true
   # Annotations to add to the service account
@@ -50,7 +52,16 @@ securityContext: {}
   # runAsUser: 1000
 
 env:
-  - name
+  - name: TOKEN
+    valueFrom:
+      secretKeyRef:
+        name: musicbot
+        key: token
+  - name: OWNER
+    valueFrom:
+      configMapKeyRef:
+        name: musicbot
+        key: owner
 
 # This is for setting up a service more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/
 service:
