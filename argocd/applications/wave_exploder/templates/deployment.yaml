@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wave_exploder
+  namespace: argocd
+  labels:
+    app: wave_exploder
+spec:
+  selector:
+    matchLabels:
+      app: wave_exploder
+  template:
+    metadata:
+      namespace: argocd
+      labels:
+        app: wave_exploder
+    spec:
+      containers:
+        - name: wave_exploder
+          image: ghcr.io/rkun123/wave_exploder
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: wave_exploder
+                  key: token
+            - name: EXPLODE_CHANNEL_ID
+              valueFrom:
+                secretKeyRef:
+                  name: wave_exploder
+                  key: channel
