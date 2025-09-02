@@ -12,11 +12,6 @@ applications:
     tool:
       helm:
         releaseName: cloudflared
-  - name: hello-world-test
-    path: argocd/applications/hello-world-test/
-    tool:
-      helm:
-        releaseName: hello-world-test
   - name: neguko
     path: argocd/applications/neguko/
     tool:
