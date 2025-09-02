@@ -22,8 +22,8 @@ applications:
     tool:
       helm:
         releaseName: neguko
-  - name: wave_exploder
-    path: argocd/applications/wave_exploder/
+  - name: wave-exploder
+    path: argocd/applications/wave-exploder/
     tool:
       helm:
-        releaseName: wave_exploder
+        releaseName: wave-exploder
