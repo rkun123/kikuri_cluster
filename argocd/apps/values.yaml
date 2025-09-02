@@ -8,17 +8,17 @@ config:
 
 applications:
   - name: cloudflared
-    path: applications/cloudflared
+    path: argocd/applications/cloudflared/
     tool:
       helm:
         releaseName: cloudflared
   - name: hello-world-test
-    path: applications/hello-world-test
+    path: argocd/applications/hello-world-test/
     tool:
       helm:
         releaseName: hello-world-test
   - name: neguko
-    path: applications/neguko
+    path: argocd/applications/neguko/
     tool:
       helm:
         releaseName: neguko
