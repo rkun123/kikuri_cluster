@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: hello-world-test
+  namespace: argocd
   labels:
     app: hello-world-test
 spec:
@@ -11,6 +12,7 @@ spec:
       app: hello-world-test
   template:
     metadata:
+      namespace: argocd
       labels:
         app: hello-world-test
     spec:
