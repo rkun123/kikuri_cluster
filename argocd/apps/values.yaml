@@ -22,3 +22,8 @@ applications:
     tool:
       helm:
         releaseName: wave-exploder
+  - name: storage-class
+    path: argocd/applications/storage-class/
+    tool:
+      helm:
+        releaseName: storage-class
