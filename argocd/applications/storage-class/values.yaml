@@ -15,18 +15,17 @@ source:
   chart: nfs-subdir-external-provisioner
   targetRevision: 4.0.18
   helm:
-    valueFiles:
-    - values/nfs.yaml
+    valueObject:
+      nfs:
+        server: 192.168.0.23
+        path: /kikuri_cluster_pvs
+        mountOptions: []
+        volumeName: nfs-subdir-external-provisioner-root
 
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
-nfs:
-  server: ""
-  path: "/"
-  mountOptions: []
-  volumeName: nfs-subdir-external-provisioner-root
 
 storageClass:
   name: nfs-client
