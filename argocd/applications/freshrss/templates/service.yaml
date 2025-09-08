@@ -1,8 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  labels:
-    app: freshrss
+  labels: {{ .Values.labels }}
   name: {{ include "freshrss.name" . }}
   namespace: {{ .Values.namespace }}
 spec:

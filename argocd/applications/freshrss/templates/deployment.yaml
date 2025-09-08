@@ -3,16 +3,14 @@ kind: Deployment
 metadata:
   name: {{ include "freshrss.name" . }}
   namespace: {{ .Values.namespace }}
-  labels:
-    app: freshrss
+  labels: {{ .Values.labels }}
 spec:
   selector:
     matchLabels:
       app: freshrss
   template:
     metadata:
-      labels:
-        app: freshrss
+      labels: {{ .Values.labels }}
     spec:
       containers:
         - name: freshrss
