@@ -1,0 +1,30 @@
+nameOverride: ""
+fullnameOverride: ""
+
+namespace: freshrss
+destination:
+  server: https://kubernetes.default.svc
+
+source:
+  image: freshrss/freshrss
+  tag: 1.27.0
+  path: .
+  chart: nfs-subdir-external-provisioner
+  targetRevision: 4.0.18
+  helm:
+    valuesObject:
+      nfs:
+        server: "192.168.0.23"
+        path: /kikuri_cluster_pvs
+
+env:
+  TZ: Asia/Tokyo
+
+db:
+  user: freshrss
+  database: freshrss
+  password: freshrss
+  port: 5432
+
+pvc:
+  storageClass: slow
