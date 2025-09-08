@@ -55,7 +55,9 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: postgres
+      {{- with .Values.labels }}
+      {{ toYaml . }}
+      {{- end }}
   template:
     metadata:
       labels:
