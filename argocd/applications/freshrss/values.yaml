@@ -24,7 +24,7 @@ db:
   user: freshrss
   database: freshrss
   password: freshrss
-  port: 5432
+  port: "5432"
 
 pvc:
   storageClass: slow
