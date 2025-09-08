@@ -27,3 +27,8 @@ applications:
     tool:
       helm:
         releaseName: slow
+  - name: freshrss
+    path: argocd/applications/freshrss/
+    tool:
+      helm:
+        releaseName: freshrss
