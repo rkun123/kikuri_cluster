@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: freshrss
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: freshrss
+spec:
+  selector:
+    matchLabels:
+      app: freshrss
+  template:
+    metadata:
+      labels:
+        app: freshrss
+    spec:
+      containers:
+        - name: freshrss
+          image: {{ .Values.source.image }}:{{ .Values.source.tag }}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          env:
+            - name: TZ
+              value: {{ .Values.env.TZ }}
+            - name: CRON_MIN
+              value: "3,33"
+            - name: DB_HOST
+              value: {{ include "freshrss.db.host" . }}
+            - name: DB_BASE
+              value: {{ .Values.db.database }}
+            - name: DB_PORT
+              value: {{ .Values.db.port }}
+            - name: DB_USER
+              value: {{ .Values.db.user }}
+            - name: DB_PASSWORD
+              value: {{ .Values.db.password }}
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "freshrss.db.name" . }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: postgres
+spec:
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:17.6
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: postgres
+              containerPort: 5432
+              protocol: TCP
+          env:
+            - name: POSTGRES_DB
+              value: {{ .Values.db.database }}
+            - name: POSTGRES_USER
+              value: {{ .Values.db.user }}
+            - name: POSTGRES_PASSWORD
+              value: {{ .Values.db.password }}
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: {{ include "freshrss.db.name" . }}
+      volumes:
+        - name: {{ include "freshrss.db.name" . }}
+          persistentVolumeClaim:
+            claimName: {{ include "freshrss.db.name" . }}
+
+
