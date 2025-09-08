@@ -28,3 +28,6 @@ db:
 
 pvc:
   storageClass: slow
+  accessModes:
+    - ReadWriteOnce
+  storage: 5Gi
