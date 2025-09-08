@@ -3,14 +3,20 @@ kind: Deployment
 metadata:
   name: {{ include "freshrss.name" . }}
   namespace: {{ .Values.namespace }}
-  labels: {{ .Values.labels }}
+  labels:
+    {{- with .Values.labels }}
+    {{ toYaml . }}
+    {{- end }}
 spec:
   selector:
     matchLabels:
       app: freshrss
   template:
     metadata:
-      labels: {{ .Values.labels }}
+      labels:
+        {{- with .Values.labels }}
+        {{ toYaml . }}
+        {{- end }}
     spec:
       containers:
         - name: freshrss
@@ -43,7 +49,9 @@ metadata:
   name: {{ include "freshrss.db.name" . }}
   namespace: {{ .Values.namespace }}
   labels:
-    app: postgres
+    {{- with .Values.labels }}
+    {{ toYaml . }}
+    {{- end }}
 spec:
   selector:
     matchLabels:
@@ -51,7 +59,9 @@ spec:
   template:
     metadata:
       labels:
-        app: postgres
+        {{- with .Values.labels }}
+        {{ toYaml . }}
+        {{- end }}
     spec:
       containers:
         - name: postgres
