@@ -1,10 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: freshrss
+  name: {{ include "freshrss.name" . }}
   namespace: {{ .Values.namespace }}
   labels:
-    app: freshrss
+    {{- with .Values.labels }}
+    {{ toYaml . }}
+    {{- end }}
 spec:
   selector:
     matchLabels:
@@ -12,7 +14,9 @@ spec:
   template:
     metadata:
       labels:
-        app: freshrss
+        {{- with .Values.labels }}
+        {{ toYaml . }}
+        {{- end }}
     spec:
       containers:
         - name: freshrss
@@ -32,7 +36,7 @@ spec:
             - name: DB_BASE
               value: {{ .Values.db.database }}
             - name: DB_PORT
-              value: {{ .Values.db.port }}
+              value: {{ .Values.db.port | quote }}
             - name: DB_USER
               value: {{ .Values.db.user }}
             - name: DB_PASSWORD
@@ -45,15 +49,21 @@ metadata:
   name: {{ include "freshrss.db.name" . }}
   namespace: {{ .Values.namespace }}
   labels:
-    app: postgres
+    {{- with .Values.labels }}
+    {{ toYaml . }}
+    {{- end }}
 spec:
   selector:
     matchLabels:
-      app: postgres
+      {{- with .Values.labels }}
+      {{ toYaml . }}
+      {{- end }}
   template:
     metadata:
       labels:
-        app: postgres
+        {{- with .Values.labels }}
+        {{ toYaml . }}
+        {{- end }}
     spec:
       containers:
         - name: postgres

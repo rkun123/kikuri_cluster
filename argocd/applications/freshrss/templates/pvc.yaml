@@ -3,6 +3,14 @@ kind: PersistentVolumeClaim
 metadata:
   name: {{ include "freshrss.db.name" . }}
   namespace: {{ .Values.namespace }}
+  labels:
+    {{- with .Values.labels }}
+    {{ toYaml . }}
+    {{- end }}
 spec:
   storageClassName: nfs-client
   volumeName: {{ include "freshrss.db.name" . }}
+  accessModes: {{ .Values.pvc.accessModes }}
+  resources:
+    requests:
+      storage: {{ .Values.pvc.storage }}
