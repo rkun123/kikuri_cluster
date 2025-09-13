@@ -1,0 +1,18 @@
+apiVersion: v1
+entries:
+  kikuri:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2025-09-13T02:25:49.255299127Z"
+    dependencies:
+    - name: argo-cd
+      repository: https://argoproj.github.io/argo-helm
+      version: 8.3.7
+    description: Bootstrap Kikuri cluster
+    digest: ad7b106afb9204b9dc40f8acff909e13bd59d969c6b0085aae325d418c7e4839
+    name: kikuri
+    type: application
+    urls:
+    - https://github.com/rkun123/kikuri_cluster/releases/download/kikuri-0.0.1/kikuri-0.0.1.tgz
+    version: 0.0.1
+generated: "2025-09-13T02:25:49.255314625Z"
