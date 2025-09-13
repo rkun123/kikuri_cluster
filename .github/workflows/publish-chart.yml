@@ -27,6 +27,5 @@ jobs:
       - uses: helm/chart-releaser-action@v1.6.0
         with:
           charts_dir: ./kikuri
-          charts_repo_url: https://rkun123.github.io/kikuri_cluster
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
