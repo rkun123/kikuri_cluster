@@ -3,3 +3,11 @@ argo-cd:
     insecure: true
     service:
       type: NodePort
+  configs:
+    cmp:
+      repositories:
+        apps:
+          name: apps
+          type: git
+          url: https://github.com/rkun123/kikuri_cluster
+          path: argocd/apps
