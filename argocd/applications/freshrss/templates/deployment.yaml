@@ -85,6 +85,7 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: {{ include "freshrss.db.name" . }}
+              subPath: postgresql-data
       volumes:
         - name: {{ include "freshrss.db.name" . }}
           persistentVolumeClaim:
