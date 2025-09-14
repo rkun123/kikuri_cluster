@@ -29,6 +29,9 @@ db:
   password: freshrss
   port: 5432
 
+  labels:
+    app: freshrss-db
+
 pvc:
   storageClass:
     name: slow

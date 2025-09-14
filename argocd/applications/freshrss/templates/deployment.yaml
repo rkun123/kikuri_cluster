@@ -49,7 +49,7 @@ metadata:
   name: {{ include "freshrss.db.name" . }}
   namespace: {{ .Values.namespace }}
   labels:
-    {{- with .Values.labels }}
+    {{- with .Values.db.labels }}
     {{ toYaml . }}
     {{- end }}
 spec:

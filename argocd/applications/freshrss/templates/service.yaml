@@ -18,3 +18,26 @@ spec:
   type: ClusterIP
 status:
   loadBalancer: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    {{- with .Values.db.labels }}
+    {{ toYaml . }}
+    {{- end }}
+  name: {{ include "freshrss.db.name" . }}
+  namespace: {{ .Values.namespace }}
+spec:
+  ports:
+  - name: postgres
+    port: 5432
+    protocol: TCP
+    targetPort: 5432
+  selector:
+    {{- with .Values.db.labels }}
+    {{ toYaml . }}
+    {{- end }}
+  type: ClusterIP
+status:
+  loadBalancer: {}
