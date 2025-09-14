@@ -55,13 +55,13 @@ metadata:
 spec:
   selector:
     matchLabels:
-      {{- with .Values.labels }}
+      {{- with .Values.db.labels }}
       {{ toYaml . }}
       {{- end }}
   template:
     metadata:
       labels:
-        {{- with .Values.labels }}
+        {{- with .Values.db.labels }}
         {{ toYaml . }}
         {{- end }}
     spec:
