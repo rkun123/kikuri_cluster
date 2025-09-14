@@ -30,7 +30,8 @@ db:
   port: 5432
 
 pvc:
-  storageClass: slow
+  storageClass:
+    name: slow
   accessModes:
     - ReadWriteOnce
   storage: 5Gi

@@ -8,8 +8,7 @@ metadata:
     {{ toYaml . }}
     {{- end }}
 spec:
-  storageClassName: nfs-client
-  volumeName: {{ include "freshrss.db.name" . }}
+  storageClassName: {{ .Values.pvc.storageClass.name }}
   accessModes: {{ .Values.pvc.accessModes }}
   resources:
     requests:
