@@ -6,6 +6,8 @@ miniflux:
   # For using built-in postgresql
   postgresql:
     enabled: true
+    auth:
+      username: postgres
     global:
       defaultStorageClass: slow
     persistence:
