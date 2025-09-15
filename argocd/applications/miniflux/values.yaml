@@ -1,0 +1,19 @@
+miniflux:
+  ingress:
+    main:
+      enabled: false
+
+  # For using built-in postgresql
+  postgresql:
+    enabled: true
+    persistence:
+      enabled: true
+      size: 8Gi
+      storageClass: 
+        name: slow
+
+  config:
+    # CREATE_ADMIN: "true"
+    # ADMIN_USERNAME: "admin"
+    # ADMIN_PASSWORD: "password"
+    DATABASE_URL: "postgres://miniflux:miniflux@miniflux-postgresql/miniflux?sslmode=disable"
