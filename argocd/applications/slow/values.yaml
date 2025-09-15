@@ -14,5 +14,6 @@ source:
         server: "192.168.0.23"
         path: /kikuri_cluster_pvs
       storageClass:
+        defaultClass: true
         name: slow
         reclaimPolicy: Retain
