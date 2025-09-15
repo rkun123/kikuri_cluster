@@ -8,3 +8,6 @@ miniflux:
     enabled: true
     persistence:
       enabled: true
+    auth:
+      username: postgres
+      password: postgres
