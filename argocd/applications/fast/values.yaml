@@ -14,5 +14,6 @@ source:
         server: "192.168.0.23"
         path: /kikuri_fast
       storageClass:
+        defaultClass: true
         name: fast
         reclaimPolicy: Retain
