@@ -6,7 +6,8 @@ miniflux:
   # For using built-in postgresql
   postgresql:
     enabled: true
-    defaultStorageClass: slow
+    global:
+      defaultStorageClass: slow
 
   config:
     # CREATE_ADMIN: "true"
