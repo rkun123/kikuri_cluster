@@ -6,10 +6,10 @@ miniflux:
   # For using built-in postgresql
   postgresql:
     enabled: true
+    global:
+      defaultStorageClass: slow
     persistence:
       enabled: true
-      storageClass: slow
-      size: 8Gi
 
   config:
     # CREATE_ADMIN: "true"
