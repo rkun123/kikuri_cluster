@@ -6,7 +6,5 @@ miniflux:
   # For using built-in postgresql
   postgresql:
     enabled: true
-    auth:
-      postgresPassword: ""
     persistence:
       enabled: true
