@@ -2,9 +2,16 @@ miniflux:
   ingress:
     main:
       enabled: false
+  auth:
+    username: miniflux
+    password: miniflux
 
   # For using built-in postgresql
   postgresql:
     enabled: true
+    auth:
+      username: miniflux
+      password: miniflux
+      postgresPassword: miniflux
     persistence:
       enabled: true
