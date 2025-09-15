@@ -7,7 +7,7 @@ miniflux:
   postgresql:
     enabled: true
     persistence:
-      enabeld: true
+      enabled: true
       storageClass: slow
       size: 8Gi
 
