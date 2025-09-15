@@ -6,15 +6,5 @@ miniflux:
   # For using built-in postgresql
   postgresql:
     enabled: true
-    auth:
-      username: postgres
-    global:
-      defaultStorageClass: slow
     persistence:
       enabled: true
-
-  config:
-    # CREATE_ADMIN: "true"
-    # ADMIN_USERNAME: "admin"
-    # ADMIN_PASSWORD: "password"
-    # DATABASE_URL: "postgres://miniflux:miniflux@miniflux-postgresql/miniflux?sslmode=disable"
