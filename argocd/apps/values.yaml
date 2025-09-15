@@ -32,3 +32,8 @@ applications:
     tool:
       helm:
         releaseName: freshrss
+  - name: miniflux
+    path: argocd/applications/miniflux/
+    tool:
+      helm:
+        releaseName: miniflux
