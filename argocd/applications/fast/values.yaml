@@ -1,4 +1,4 @@
-nameOverride: slow-storage
+nameOverride: fast-storage
 namespace: nfs-provisioner
 destination:
   server: https://kubernetes.default.svc
@@ -14,5 +14,5 @@ source:
         server: "192.168.0.23"
         path: /kikuri_cluster_pvs
       storageClass:
-        name: slow
+        name: fast
         reclaimPolicy: Retain
