@@ -12,7 +12,7 @@ source:
     valuesObject:
       nfs:
         server: "192.168.0.23"
-        path: /kikuri_cluster_pvs
+        path: /kikuri_fast
       storageClass:
         name: fast
         reclaimPolicy: Retain
