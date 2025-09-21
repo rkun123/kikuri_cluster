@@ -22,11 +22,11 @@ applications:
     tool:
       helm:
         releaseName: wave-exploder
-  - name: slow
-    path: argocd/applications/slow/
+  - name: fast
+    path: argocd/applications/fast/
     tool:
       helm:
-        releaseName: slow
+        releaseName: fast
   - name: freshrss
     path: argocd/applications/freshrss/
     tool:
