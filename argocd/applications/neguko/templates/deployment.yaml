@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: neguko
-  namespace: argocd
+  namespace: musicbot
   labels:
     app: neguko
 spec:
@@ -11,41 +11,22 @@ spec:
       app: neguko
   template:
     metadata:
-      namespace: argocd
+      namespace: musicbot
       labels:
         app: neguko
     spec:
       containers:
         - name: neguko
-          image: skyzi000/jmusicbot-jp
+          image: ghcr.io/rkun123/MusicBot:master
           imagePullPolicy: IfNotPresent
-          command:
-            - java
-            - "-Dnogui=true"
-            - "-Dtoken=${TOKEN}"
-            - "-Downer=${OWNER}"
-            - "-jar"
-            - JMusicBot.jar
-
-          env:
-            - name: TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: musicbot
-                  key: token
-            - name: OWNER
-              valueFrom:
-                secretKeyRef:
-                  name: musicbot
-                  key: owner
-      #     volumeMounts:
-      #       - mountPath: /jmusicbot/config.txt
-      #         name: config
-      #         subPath: config.txt
-      # volumes:
-      #   - name: config
-      #     configMap:
-      #       name: musicbot
-      #       items:
-      #       - key: config.txt
-      #         path: config.txt
+          volumeMounts:
+            - mountPath: /musicbot/config/
+              name: options
+              subPath: config
+      volumes:
+        - name: options
+          secret:
+            secretName: musicbot
+            items:
+              - key: options
+                path: options.ini
