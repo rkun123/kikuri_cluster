@@ -25,8 +25,15 @@ spec:
             - mountPath: /musicbot/config/options.ini
               name: options
               subPath: options
-            - mountPath: /musicbot/files
+            - mountPath: /musicbot/audio_cache/
               name: files
+              subPath: audio_cache
+            - mountPath: /musicbot/data/
+              name: files
+              subPath: data
+            - mountPath: /musicbot/logs/
+              name: files
+              subPath: logs
       volumes:
         - name: options
           secret:
