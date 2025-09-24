@@ -8,7 +8,7 @@ metadata:
 spec:
   storageClassName: fast
   accessModes: 
-    - readWriteOnce
+    - ReadWriteOnce
   resources:
     requests:
       storage: 5Gi
