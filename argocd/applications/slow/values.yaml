@@ -1,0 +1,38 @@
+namespace: nfs-provisioner
+destination:
+  server: https://kubernetes.default.svc
+
+source:
+  repoURL: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
+  path: .
+  chart: nfs-subdir-external-provisioner
+  targetRevision: 4.0.18
+  helm:
+    valuesObject:
+      nfs:
+        server: "192.168.0.23"
+        path: /kikuri_slow
+      storageClass:
+        name: slow
+        reclaimPolicy: Retain
+
+app:
+  name: slow
+  namespace: argocd
+  destination:
+    namespace: nfs-provisioner
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    repoURL: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
+    path: .
+    chart: nfs-subdir-external-provisioner
+    targetRevision: 4.0.18
+    helm:
+      valuesObject:
+        nfs:
+          server: "192.168.0.23"
+          path: /kikuri_slow
+        storageClass:
+          name: slow
+          reclaimPolicy: Retain
