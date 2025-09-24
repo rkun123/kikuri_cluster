@@ -22,6 +22,8 @@ spec:
           volumeMounts:
             - mountPath: /musicbot/config/
               name: options
+            - mountPath: /musicbot/files
+              name: files
       volumes:
         - name: options
           secret:
@@ -29,3 +31,6 @@ spec:
             items:
               - key: options
                 path: options.ini
+        - name: files
+          persistentVolumeClaim:
+            claimName: neguko
