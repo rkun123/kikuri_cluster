@@ -22,17 +22,15 @@ spec:
           image: ghcr.io/rkun123/musicbot:master
           imagePullPolicy: IfNotPresent
           volumeMounts:
-            - mountPath: /musicbot/config/
+            - mountPath: /musicbot/config/options.ini
               name: options
+              subPath: options
             - mountPath: /musicbot/files
               name: files
       volumes:
         - name: options
           secret:
             secretName: musicbot
-            items:
-              - key: options
-                path: options.ini
         - name: files
           persistentVolumeClaim:
             claimName: neguko
