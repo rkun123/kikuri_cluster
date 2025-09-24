@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: neguko
+  namespace: musicbot
+  labels:
+    app: neguko
+spec:
+  storageClassName: fast
+  accessModes: 
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
