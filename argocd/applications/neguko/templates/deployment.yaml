@@ -22,7 +22,6 @@ spec:
           volumeMounts:
             - mountPath: /musicbot/config/
               name: options
-              subPath: config
       volumes:
         - name: options
           secret:
