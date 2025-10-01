@@ -9,9 +9,9 @@ replicaCount: 1
 image:
   repository: ghcr.io/rkun123/wave_exploder
   # This sets the pull policy for images.
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "main"
+  tag: latest
 
 namespace: argocd
 
