@@ -8,8 +8,24 @@ metadata:
     {{ toYaml . }}
     {{- end }}
 spec:
-  storageClassName: {{ .Values.pvc.storageClass.name }}
-  accessModes: {{ .Values.pvc.accessModes }}
+  storageClassName: {{ .Values.pvc_db.storageClass.name }}
+  accessModes: {{ .Values.pvc_db.accessModes }}
   resources:
     requests:
-      storage: {{ .Values.pvc.storage }}
+      storage: {{ .Values.pvc_db.storage }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "freshrss.data.name" . }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- with .Values.labels }}
+    {{ toYaml . }}
+    {{- end }}
+spec:
+  storageClassName: {{ .Values.pvc_data.storageClass.name }}
+  accessModes: {{ .Values.pvc_data.accessModes }}
+  resources:
+    requests:
+      storage: {{ .Values.pvc_data.storage }}

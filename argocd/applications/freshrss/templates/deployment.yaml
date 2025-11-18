@@ -41,6 +41,14 @@ spec:
               value: {{ .Values.db.user }}
             - name: DB_PASSWORD
               value: {{ .Values.db.password }}
+          volumeMounts:
+            - mountPath: /var/www/FreshRSS/data
+              name: {{ include "freshrss.data.name" . }}
+              subPath: freshrss-data
+      volumes:
+        - name: {{ include "freshrss.data.name" . }}
+          persistentVolumeClaim:
+            claimName: {{ include "freshrss.data.name" . }}
 
 ---
 apiVersion: apps/v1

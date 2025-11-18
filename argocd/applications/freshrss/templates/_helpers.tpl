@@ -61,3 +61,11 @@ DB関連
 {{- define "freshrss.db.host" -}}
 {{- include "freshrss.name" . }}
 {{- end}}
+
+{{/*
+Data関連
+*/}}
+
+{{- define "freshrss.data.name" -}}
+{{ include "freshrss.name" . }}-data
+{{- end }}
