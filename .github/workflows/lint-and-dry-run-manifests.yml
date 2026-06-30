@@ -26,13 +26,11 @@ jobs:
         with:
           version: 'v1.34.0'
 
-      - name: Helm Lint
-        run: |
-          echo "=== Linting argocd/apps ==="
-          helm lint argocd/apps/
-          
-          echo "=== Linting argocd/applications/bambuddy ==="
-          helm lint argocd/applications/bambuddy
+      - name: Set up chart-testing
+        uses: helm/chart-testing-action@v2.6.1
+
+      - name: Run chart-testing (lint)
+        run: ct lint --chart-dirs argocd/applications,argocd/apps
 
       - name: Validate and Dry-Run
         run: |
