@@ -1,0 +1,36 @@
+name: Lint Manifests
+
+on:
+  pull_request:
+    branches:
+      - main
+    # yamlファイルやチャートに変更があったときだけ実行
+    paths:
+      - 'argocd/**'
+      - '.github/workflows/test-manifests.yaml'
+
+jobs:
+  dry-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Helm
+        uses: azure/setup-helm@v4
+        with:
+          version: 'v3.18.6'
+
+      - name: Install kubectl
+        uses: azure/setup-kubectl@v4
+        with:
+          version: 'v1.34.0'
+
+      - name: Helm Lint Recursively
+        run: |
+          # argocd/ 配下から Chart.yaml がある場所をすべて探し、そのディレクトリに対して lint を実行
+          find argocd -name "Chart.yaml" | while read -r chart_yaml; do
+            chart_dir=$(dirname "$chart_yaml")
+            echo "=== Linting: $chart_dir ==="
+            helm lint "$chart_dir"
+          done
