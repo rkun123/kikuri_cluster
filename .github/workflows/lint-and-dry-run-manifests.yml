@@ -35,9 +35,21 @@ jobs:
             helm lint "$chart_dir"
           done
 
+      - name: Setup Kubeconform
+        # GitHub Actions に kubeconform をインストールする公式推奨のアクション
+        uses: yannh/kubeconform-action@v0.0.8
+
       - name: Validate and Dry-Run
         run: |
           BRANCH_NAME="${{ github.head_ref }}"
           echo "Testing manifests with targetRevision: ${BRANCH_NAME}"
           
-          helm template argocd/apps/ --set config.targetRevision=${BRANCH_NAME} | kubectl apply --dry-run=client --validate=false -f -
+          # 1. Helm でテンプレートを生成して一度ファイル（rendered.yaml）に書き出す
+          helm template argocd/apps/ -f argocd/apps/values.yaml --set config.targetRevision=${BRANCH_NAME} > rendered.yaml
+          
+          # 2. 生成された YAML の中身を確認用にログに出力（デバッグ用）
+          cat rendered.yaml
+          
+          # 3. kubeconform で YAML の構文チェックを実行
+          # -ignore-missing-schemas: ArgoCD などのカスタムリソース(CRD)のスキーマがなくてもエラーにしない設定
+          kubeconform -summary -ignore-missing-schemas rendered.yaml
