@@ -38,7 +38,7 @@ jobs:
         run: |
           SHORT_SHA=$(git rev-parse --short HEAD)
           
-          CHART_DIR="." 
+          CHART_DIR="./argocd/apps" 
           
           BASE_VERSION=$(helm show chart $CHART_DIR | grep '^version:' | awk '{print $2}')
           NEW_VERSION="${BASE_VERSION}-${SHORT_SHA}"
