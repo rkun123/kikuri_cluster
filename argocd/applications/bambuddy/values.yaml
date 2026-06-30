@@ -1,0 +1,53 @@
+nameOverride: ""
+fullnameOverride: ""
+
+namespace: bambuddy
+destination:
+  server: https://kubernetes.default.svc
+
+labels:
+  app: bambuddy
+
+source:
+  image: ghcr.io/maziggy/bambuddy
+  tag: latest
+  path: .
+  chart: nfs-subdir-external-provisioner
+  targetRevision: 4.0.18
+  helm:
+    valuesObject:
+      nfs:
+        server: "192.168.0.23"
+        path: /kikuri_fast
+
+# docker-compose.yml の構成を再現するための環境変数
+env:
+  TZ: Asia/Tokyo
+  PUID: "1000"
+  PGID: "1000"
+  # 必要に応じて以下の環境変数を有効化
+  # BAMBUDDY_EXTERNAL_ROOTS: ""
+  # USE_SYSTEM_TRUST_STORE: "false"
+
+# ネットワークおよび権限設定
+securityContext:
+  capabilities:
+    add:
+      - NET_BIND_SERVICE
+
+hostNetwork: true
+
+# 永続化ボリュームの設定
+pvc_data:
+  storageClass:
+    name: fast
+  accessModes:
+    - ReadWriteOnce
+  storage: 2Gi
+
+pvc_logs:
+  storageClass:
+    name: fast
+  accessModes:
+    - ReadWriteOnce
+  storage: 500Mi
