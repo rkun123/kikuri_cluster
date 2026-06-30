@@ -17,11 +17,14 @@ spec:
       labels:
         {{- include "bambuddy.selectorLabels" . | nindent 8 }}
     spec:
-      hostNetwork: {{ .Values.hostNetwork }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.source.image }}:{{ .Values.source.tag }}"
           imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
           securityContext:
             capabilities:
               add:
