@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "bambuddy.fullname" . }}-data
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "bambuddy.labels" . | nindent 4 }}
+spec:
+  accessModes:
+    {{- range .Values.pvc_data.accessModes }}
+    - {{ . | quote }}
+    {{- end }}
+  storageClassName: {{ .Values.pvc_data.storageClass.name | quote }}
+  resources:
+    requests:
+      storage: {{ .Values.pvc_data.storage | quote }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "bambuddy.fullname" . }}-logs
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "bambuddy.labels" . | nindent 4 }}
+spec:
+  accessModes:
+    {{- range .Values.pvc_logs.accessModes }}
+    - {{ . | quote }}
+    {{- end }}
+  storageClassName: {{ .Values.pvc_logs.storageClass.name | quote }}
+  resources:
+    requests:
+      storage: {{ .Values.pvc_logs.storage | quote }}

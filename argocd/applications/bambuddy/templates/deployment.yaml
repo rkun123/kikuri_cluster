@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "bambuddy.fullname" . }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "bambuddy.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      {{- include "bambuddy.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "bambuddy.selectorLabels" . | nindent 8 }}
+    spec:
+      hostNetwork: {{ .Values.hostNetwork }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.source.image }}:{{ .Values.source.tag }}"
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            capabilities:
+              add:
+                {{- range .Values.securityContext.capabilities.add }}
+                - {{ . | quote }}
+                {{- end }}
+          env:
+            - name: TZ
+              value: {{ .Values.env.TZ | quote }}
+            - name: PUID
+              value: {{ .Values.env.PUID | quote }}
+            - name: PGID
+              value: {{ .Values.env.PGID | quote }}
+          volumeMounts:
+            - name: data
+              mountPath: /app/data
+            - name: logs
+              mountPath: /app/logs
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ include "bambuddy.fullname" . }}-data
+        - name: logs
+          persistentVolumeClaim:
+            claimName: {{ include "bambuddy.fullname" . }}-logs

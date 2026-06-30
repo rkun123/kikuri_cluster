@@ -32,3 +32,8 @@ applications:
     tool:
       helm:
         releaseName: freshrss
+  - name: bambuddy
+    path: argocd/applications/bambuddy/
+    tool:
+      helm:
+        releaseName: bambuddy
