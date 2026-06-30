@@ -26,11 +26,14 @@ jobs:
         with:
           version: 'v1.34.0'
 
-      - name: Set up chart-testing
-        uses: helm/chart-testing-action@v2.6.1
-
-      - name: Run chart-testing (lint)
-        run: ct lint --chart-dirs argocd/applications,argocd/apps
+      - name: Helm Lint Reursively
+        run: |
+          # argocd/ 配下から Chart.yaml がある場所をすべて探し、そのディレクトリに対して lint を実行
+          find argocd -name "Chart.yaml" | while read -r chart_yaml; do
+            chart_dir=$(dirname "$chart_yaml")
+            echo "=== Linting: $chart_dir ==="
+            helm lint "$chart_dir"
+          done
 
       - name: Validate and Dry-Run
         run: |
