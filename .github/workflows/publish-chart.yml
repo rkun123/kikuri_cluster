@@ -32,6 +32,26 @@ jobs:
           helm repo add argo-cd https://argoproj.github.io/argo-helm
           helm repo update
 
-      - uses: helm/chart-releaser-action@v1.6.0
+      - name: Package and Release Helm Chart
         env:
-          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          SHORT_SHA=$(git rev-parse --short HEAD)
+          
+          CHART_DIR="." 
+          
+          BASE_VERSION=$(helm show chart $CHART_DIR | grep '^version:' | awk '{print $2}')
+          NEW_VERSION="${BASE_VERSION}-${SHORT_SHA}"
+          
+          echo "Packaging chart with version: ${NEW_VERSION}"
+          helm package $CHART_DIR --version "$NEW_VERSION"
+          
+          TAG_NAME="chart-${NEW_VERSION}"
+          
+          if gh release view "$TAG_NAME" >/dev/null 2>&1; then
+            echo "Release $TAG_NAME already exists. Uploading asset..."
+            gh release upload "$TAG_NAME" *.tgz --clobber
+          else
+            echo "Creating new release $TAG_NAME..."
+            gh release create "$TAG_NAME" *.tgz --title "Chart Release ${NEW_VERSION}" --notes "Automated release for commit ${SHORT_SHA}"
+          fi
