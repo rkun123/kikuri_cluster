@@ -1,0 +1,42 @@
+name: Lint and Dry-Run Manifests
+
+on:
+  pull_request:
+    branches:
+      - main
+    # yamlファイルやチャートに変更があったときだけ実行
+    paths:
+      - 'argocd/**'
+      - '.github/workflows/test-manifests.yaml'
+
+jobs:
+  dry-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Helm
+        uses: azure/setup-helm@v4
+        with:
+          version: 'v3.18.6'
+
+      - name: Install kubectl
+        uses: azure/setup-kubectl@v4
+        with:
+          version: 'v1.34.0'
+
+      - name: Helm Lint
+        run: |
+          echo "=== Linting argocd/apps ==="
+          helm lint argocd/apps/
+          
+          echo "=== Linting argocd/applications/bambuddy ==="
+          helm lint argocd/applications/bambuddy
+
+      - name: Validate and Dry-Run
+        run: |
+          BRANCH_NAME="${{ github.head_ref }}"
+          echo "Testing manifests with targetRevision: ${BRANCH_NAME}"
+          
+          helm template argocd/apps/ --set config.targetRevision=${BRANCH_NAME} | kubectl apply --dry-run=client -f -
