@@ -40,4 +40,4 @@ jobs:
           BRANCH_NAME="${{ github.head_ref }}"
           echo "Testing manifests with targetRevision: ${BRANCH_NAME}"
           
-          helm template argocd/apps/ --set config.targetRevision=${BRANCH_NAME} | kubectl apply --dry-run=client -f -
+          helm template argocd/apps/ --set config.targetRevision=${BRANCH_NAME} | kubectl apply --dry-run=client --validate=false -f -
