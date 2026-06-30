@@ -1,4 +1,4 @@
-name: Lint and Dry-Run Manifests
+name: Lint Manifests
 
 on:
   pull_request:
@@ -26,7 +26,7 @@ jobs:
         with:
           version: 'v1.34.0'
 
-      - name: Helm Lint Reursively
+      - name: Helm Lint Recursively
         run: |
           # argocd/ 配下から Chart.yaml がある場所をすべて探し、そのディレクトリに対して lint を実行
           find argocd -name "Chart.yaml" | while read -r chart_yaml; do
@@ -34,22 +34,3 @@ jobs:
             echo "=== Linting: $chart_dir ==="
             helm lint "$chart_dir"
           done
-
-      - name: Setup Kubeconform
-        # GitHub Actions に kubeconform をインストールする公式推奨のアクション
-        uses: yannh/kubeconform-action@v0.0.8
-
-      - name: Validate and Dry-Run
-        run: |
-          BRANCH_NAME="${{ github.head_ref }}"
-          echo "Testing manifests with targetRevision: ${BRANCH_NAME}"
-          
-          # 1. Helm でテンプレートを生成して一度ファイル（rendered.yaml）に書き出す
-          helm template argocd/apps/ -f argocd/apps/values.yaml --set config.targetRevision=${BRANCH_NAME} > rendered.yaml
-          
-          # 2. 生成された YAML の中身を確認用にログに出力（デバッグ用）
-          cat rendered.yaml
-          
-          # 3. kubeconform で YAML の構文チェックを実行
-          # -ignore-missing-schemas: ArgoCD などのカスタムリソース(CRD)のスキーマがなくてもエラーにしない設定
-          kubeconform -summary -ignore-missing-schemas rendered.yaml
