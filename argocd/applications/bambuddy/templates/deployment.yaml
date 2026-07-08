@@ -89,3 +89,5 @@ spec:
               value: {{ .Values.env.PUID | quote }}
             - name: PGID
               value: {{ .Values.env.PGID | quote }}
+            - name: BAMBU_API_PORT
+              value: {{ .Values.bambu_studio_api.port | quote }}

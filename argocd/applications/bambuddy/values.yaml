@@ -54,3 +54,4 @@ pvc_logs:
 bambu_studio_api:
   image: ghcr.io/maziggy/bambu-studio-api
   tag: latest
+  port: 3001
