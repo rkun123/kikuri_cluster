@@ -49,3 +49,8 @@ pvc_logs:
   accessModes:
     - ReadWriteOnce
   storage: 500Mi
+
+# bambu-studio-api の設定
+bambu-studio-api:
+  image: ghcr.io/maziggy/bambu-studio-api
+  tag: latest
