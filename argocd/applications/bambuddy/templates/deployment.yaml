@@ -70,7 +70,7 @@ spec:
     spec:
       containers:
         - name: bambu-studio-api
-          image: "{{ .Values.bambu-studio-api.image }}:{{ .Values.bambu-studio-api.tag }}"
+          image: "{{ .Values.bambu_studio_api.image }}:{{ .Values.bambu_studio_api.tag }}"
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
