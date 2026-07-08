@@ -25,8 +25,8 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - port: 3001
-      targetPort: 3001
+    - port: {{ .Values.bambu_studio_api.port }}
+      targetPort: {{ .Values.bambu_studio_api.port }}
       protocol: TCP
       name: http
   selector:
