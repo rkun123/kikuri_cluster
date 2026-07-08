@@ -50,3 +50,42 @@ spec:
         - name: logs
           persistentVolumeClaim:
             claimName: {{ include "bambuddy.fullname" . }}-logs
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bambu-studio-api
+  namespace: bambuddy
+  labels:
+    app: bambu-studio-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bambu-studio-api
+  template:
+    metadata:
+      labels:
+        app: bambu-studio-api
+    spec:
+      containers:
+        - name: bambu-studio-api
+          image: "{{ .Values.bambu_studio_api.image }}:{{ .Values.bambu_studio_api.tag }}"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 3001
+              protocol: TCP
+          securityContext:
+            capabilities:
+              add:
+                {{- range .Values.securityContext.capabilities.add }}
+                - {{ . | quote }}
+                {{- end }}
+          env:
+            - name: TZ
+              value: {{ .Values.env.TZ | quote }}
+            - name: PUID
+              value: {{ .Values.env.PUID | quote }}
+            - name: PGID
+              value: {{ .Values.env.PGID | quote }}
