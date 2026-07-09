@@ -10,10 +10,7 @@ labels:
 
 source:
   image: miniflux/miniflux
-  tag: v0.23.1
-  path: .
-  chart: nfs-subdir-external-provisioner
-  targetRevision: 4.0.18
+  tag: 2.3.2-distroless
 
 env:
   TZ: Asia/Tokyo
