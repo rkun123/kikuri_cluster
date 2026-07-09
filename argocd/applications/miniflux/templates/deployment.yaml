@@ -27,13 +27,46 @@ spec:
           env:
             - name: TZ
               value: {{ .Values.env.TZ | default "Asia/Tokyo" }}
-            - name: MINIFLUX_DATABASE_URL
-              value: postgres://{{ .Values.db.user }}:{{ .Values.db.password }}@miniflux-db:5432/{{ .Values.db.database }}?sslmode=disable
-            - name: MINIFLUX_ADMIN_USER
-              value: {{ .Values.db.user | quote }}
+            - name: DATABASE_URL
+              value: postgres://{{ .Values.db.user }}:{{ .Values.db.password }}@{{ include "miniflux.db.host" . }}:5432/{{ .Values.db.database }}?sslmode=disable
+            - name: RUN_MIGRATIONS
+              value: 1
+            - name: CREATE_ADMIN
+              value: 1
+            - name: ADMIN_USER
+              value: {{ .Values.admin.user | quote }}
+            - name: ADMIN_PASSWORD
+              value: {{ .Values.admin.user | quote }}
           volumeMounts:
             - mountPath: /data/db
               name: db-storage
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "miniflux.db.name" . }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- with .Values.db.labels }}
+    {{ toYaml . }}
+    {{- end }}
+spec:
+  selector:
+    matchLabels:
+      {{- with .Values.db.labels }}
+      {{ toYaml . }}
+      {{- end }}
+  template:
+    metadata:
+      labels:
+        {{- with .Values.db.labels }}
+        {{ toYaml . }}
+        {{- end }}
+    spec:
+      securityContext:
+        fsGroup: 999
+      containers:
         - name: postgres
           image: postgres:17.6
           imagePullPolicy: IfNotPresent
@@ -50,23 +83,8 @@ spec:
               value: {{ .Values.db.password }}
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
-              name: db-storage
+              name: {{ include "miniflux.db.name" . }}
       volumes:
-        - name: db-storage
+        - name: {{ include "miniflux.db.name" . }}
           persistentVolumeClaim:
             claimName: {{ include "miniflux.db.name" . }}
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: miniflux-db
-  namespace: {{ .Values.namespace | default "miniflux" }}
-spec:
-  clusterIP: None
-  selector:
-    app: miniflux
-  ports:
-    - port: 5432
-      targetPort: postgres
-      protocol: TCP
