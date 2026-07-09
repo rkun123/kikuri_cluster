@@ -1,0 +1,42 @@
+nameOverride: ""
+fullnameOverride: ""
+
+namespace: miniflux
+destination:
+  server: https://kubernetes.default.svc
+
+labels:
+  app: miniflux
+
+source:
+  image: miniflux/miniflux
+  tag: v0.23.1
+  path: .
+  chart: nfs-subdir-external-provisioner
+  targetRevision: 4.0.18
+
+env:
+  TZ: Asia/Tokyo
+
+db:
+  user: miniflux
+  database: miniflux
+  password: miniflux
+  port: 5432
+
+  labels:
+    app: miniflux-db
+
+pvc_db:
+  storageClass:
+    name: fast
+  accessModes:
+    - ReadWriteOnce
+  storage: 5Gi
+
+pvc_data:
+  storageClass:
+    name: fast
+  accessModes:
+    - ReadWriteOnce
+  storage: 1Gi
