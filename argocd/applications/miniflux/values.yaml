@@ -24,16 +24,13 @@ db:
   labels:
     app: miniflux-db
 
+admin:
+  user: admin
+  password: password123
+
 pvc_db:
   storageClass:
     name: fast
   accessModes:
     - ReadWriteOnce
-  storage: 5Gi
-
-pvc_data:
-  storageClass:
-    name: fast
-  accessModes:
-    - ReadWriteOnce
-  storage: 1Gi
+  storage: 2Gi
