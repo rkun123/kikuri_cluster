@@ -37,3 +37,8 @@ applications:
     tool:
       helm:
         releaseName: bambuddy
+  - name: miniflux
+    path: argocd/applications/miniflux/
+    tool:
+      helm:
+        releaseName: miniflux
