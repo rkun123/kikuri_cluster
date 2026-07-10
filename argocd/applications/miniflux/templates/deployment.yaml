@@ -14,7 +14,9 @@ spec:
   template:
     metadata:
       labels:
-        app: miniflux
+      {{- with .Values.labels }}
+      {{ toYaml . }}
+      {{- end }}
     spec:
       containers:
         - name: miniflux

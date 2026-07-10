@@ -14,18 +14,21 @@ spec:
       targetPort: 8080
       protocol: TCP
   selector:
-    app.kubernetes.io/name: {{ include "miniflux.name" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
+    {{- with .Values.labels }}
+    {{ toYaml . }}
+    {{- end }}
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: miniflux-db
+  name: {{ include "miniflux.db.name" . }}
   namespace: {{ .Values.namespace | default "miniflux" }}
 spec:
   clusterIP: None
   selector:
-    app: miniflux
+    {{- with .Values.db.labels }}
+    {{ toYaml . }}
+    {{- end }}
   ports:
     - port: 5432
       targetPort: postgres

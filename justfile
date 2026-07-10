@@ -8,3 +8,6 @@ seal:
     helm template --dry-run {{cloudflared}} -s templates/secret.yaml | kubeseal --cert kikuri1.pem -o yaml > {{cloudflared}}/templates/sealed.yaml
     helm template --dry-run {{neguko}} -s templates/secret.yaml | kubeseal --cert kikuri1.pem -o yaml > {{neguko}}/templates/sealed.yaml
     helm template --dry-run {{wave-exploder}} -s templates/secret.yaml | kubeseal --cert kikuri1.pem -o yaml > {{wave-exploder}}/templates/sealed.yaml
+
+install_dryrun:
+    helm install miniflux argocd/applications/miniflux --dry-run
