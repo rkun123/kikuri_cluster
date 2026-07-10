@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "miniflux.name" . }}-db
+  name: {{ include "miniflux.name" . }}
   namespace: {{ .Values.namespace }}
   labels:
     {{- with .Values.labels }}
