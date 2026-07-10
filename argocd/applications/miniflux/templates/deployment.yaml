@@ -37,9 +37,6 @@ spec:
               value: {{ .Values.admin.user | quote }}
             - name: ADMIN_PASSWORD
               value: {{ .Values.admin.user | quote }}
-          volumeMounts:
-            - mountPath: /data/db
-              name: db-storage
 
 ---
 apiVersion: apps/v1
