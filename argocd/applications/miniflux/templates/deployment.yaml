@@ -30,9 +30,9 @@ spec:
             - name: DATABASE_URL
               value: postgres://{{ .Values.db.user }}:{{ .Values.db.password }}@{{ include "miniflux.db.host" . }}:5432/{{ .Values.db.database }}?sslmode=disable
             - name: RUN_MIGRATIONS
-              value: 1
+              value: "1"
             - name: CREATE_ADMIN
-              value: 1
+              value: "1"
             - name: ADMIN_USER
               value: {{ .Values.admin.user | quote }}
             - name: ADMIN_PASSWORD
