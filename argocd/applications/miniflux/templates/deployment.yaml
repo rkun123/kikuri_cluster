@@ -30,15 +30,17 @@ spec:
             - name: TZ
               value: {{ .Values.env.TZ | default "Asia/Tokyo" }}
             - name: DATABASE_URL
-              value: postgres://{{ .Values.db.user }}:{{ .Values.db.password }}@{{ include "miniflux.db.host" . }}:5432/{{ .Values.db.database }}?sslmode=disable
+              value: postgres://{{ .Values.db.user }}:{{ .Values.db.password }}@{{ include "miniflux.db.name" . }}:5432/{{ .Values.db.database }}?sslmode=disable
             - name: RUN_MIGRATIONS
               value: "1"
             - name: CREATE_ADMIN
               value: "1"
-            - name: ADMIN_USER
+            - name: ADMIN_USERNAME
               value: {{ .Values.admin.user | quote }}
             - name: ADMIN_PASSWORD
-              value: {{ .Values.admin.user | quote }}
+              value: {{ .Values.admin.password | quote }}
+            - name: INTEGRATION_ALLOW_PRIVATE_NETWORKS
+              value: "1"
 
 ---
 apiVersion: apps/v1
