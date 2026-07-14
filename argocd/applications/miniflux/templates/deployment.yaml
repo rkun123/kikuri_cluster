@@ -39,6 +39,8 @@ spec:
               value: {{ .Values.admin.user | quote }}
             - name: ADMIN_PASSWORD
               value: {{ .Values.admin.password | quote }}
+            - name: INTEGRATION_ALLOW_PRIVATE_NETWORKS
+              value: "1"
 
 ---
 apiVersion: apps/v1
