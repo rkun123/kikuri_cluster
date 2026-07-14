@@ -58,10 +58,6 @@ DB 関連
 {{ include "miniflux.name" . }}-db
 {{- end }}
 
-{{- define "miniflux.db.host" -}}
-{{- include "miniflux.name" . }}
-{{- end}}
-
 {{/*
 Data 関連
 */}}
