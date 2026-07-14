@@ -38,7 +38,7 @@ spec:
             - name: ADMIN_USERNAME
               value: {{ .Values.admin.user | quote }}
             - name: ADMIN_PASSWORD
-              value: {{ .Values.admin.user | quote }}
+              value: {{ .Values.admin.password | quote }}
 
 ---
 apiVersion: apps/v1
