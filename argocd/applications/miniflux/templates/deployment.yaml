@@ -35,7 +35,7 @@ spec:
               value: "1"
             - name: CREATE_ADMIN
               value: "1"
-            - name: ADMIN_USER
+            - name: ADMIN_USERNAME
               value: {{ .Values.admin.user | quote }}
             - name: ADMIN_PASSWORD
               value: {{ .Values.admin.user | quote }}
