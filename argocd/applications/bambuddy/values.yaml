@@ -10,15 +10,8 @@ labels:
 
 source:
   image: ghcr.io/maziggy/bambuddy
-  tag: latest
-  path: .
-  chart: nfs-subdir-external-provisioner
-  targetRevision: 4.0.18
-  helm:
-    valuesObject:
-      nfs:
-        server: "192.168.0.23"
-        path: /kikuri_fast
+  # renovate: datasource=docker depName=ghcr.io/maziggy/bambuddy
+  tag: "0.2.4.8"
 
 # docker-compose.yml の構成を再現するための環境変数
 env:
@@ -53,5 +46,6 @@ pvc_logs:
 # bambustudioapi の設定
 bambu_studio_api:
   image: ghcr.io/maziggy/bambu-studio-api
-  tag: latest
+  # renovate: datasource=docker depName=ghcr.io/maziggy/bambu-studio-api
+  tag: "0.2.4.8"
   port: 3000
