@@ -1,0 +1,27 @@
+{
+  "extends": [
+    "config:recommended"
+  ],
+  "dependencyDashboard": true,
+  "prCreation": "immediate",
+  "username": "renovate-release",
+  "gitAuthor": "Renovate Bot <bot@renovateapp.com>",
+  "repositories": [
+    "rkun123/kikuri_cluster"
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["(^|/)values\\.yaml$"],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>[a-z-]+?) depName=(?<depName>[^\\s]+?)(?: packageName=(?<packageName>[^\\s]+?))?\\s*\\n\\s*.*?tag:\\s*(?<currentValue>[^\\s]+)"
+      ]
+    }
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": ["miniflux/miniflux"],
+      "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-distroless$"
+    }
+  ]
+}
