@@ -14,7 +14,7 @@
       "customType": "regex",
       "managerFilePatterns": ["(^|/)values\\.yaml$"],
       "matchStrings": [
-        "# renovate: datasource=(?<datasource>[a-z-]+?) depName=(?<depName>[^\\s]+?)(?: packageName=(?<packageName>[^\\s]+?))?\\s*\\n\\s*.*?tag:\\s*(?<currentValue>[^\\s]+)"
+        "# renovate: datasource=(?<datasource>[a-z-]+?) depName=(?<depName>[^\\s]+?)(?: packageName=(?<packageName>[^\\s]+?))?\\s*\\n\\s*.*?tag:\\s*(?<currentValue>[\"']?[^\"'\\s]+[\"']?)"
       ]
     }
   ],
@@ -22,6 +22,14 @@
     {
       "matchPackageNames": ["miniflux/miniflux"],
       "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-distroless$"
+    },
+    {
+      "matchPackageNames": ["ghcr.io/maziggy/bambuddy"],
+      "versioning": "semver"
+    },
+    {
+      "matchPackageNames": ["ghcr.io/maziggy/bambu-studio-api"],
+      "versioning": "semver"
     }
   ]
 }
