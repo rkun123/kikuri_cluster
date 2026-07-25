@@ -10,6 +10,7 @@ labels:
 
 source:
   image: miniflux/miniflux
+  # renovate: datasource=docker depName=miniflux/miniflux
   tag: 2.3.2-distroless
 
 env:
