@@ -1,0 +1,25 @@
+nameOverride: ""
+fullnameOverride: ""
+
+namespace: rsshub
+destination:
+  server: https://kubernetes.default.svc
+
+source:
+  repoURL: https://naturalselectionlabs.github.io/helm-charts
+  chart: rsshub
+  targetRevision: 0.2.9
+  helm:
+    valuesObject:
+      # RSSHub の設定
+      env:
+        NODE_ENV: production
+        CACHE_TYPE: redis
+        CACHE_EXPIRE: "300"
+        CACHE_CONTENT_EXPIRE: "3600"
+      # Redis を有効化
+      redis:
+        enabled: true
+      # Puppeteer (ブラウザレンダリング) を有効化
+      puppeteer:
+        enabled: true
