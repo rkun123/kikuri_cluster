@@ -38,6 +38,28 @@ spec:
               value: {{ .Values.env.CACHE_CONTENT_EXPIRE | quote }}
             - name: REDIS_URL
               value: {{ .Values.env.REDIS_URL | quote }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "rsshub.fullname" . }}-redis
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "rsshub.labels" . | nindent 4 }}
+    app.kubernetes.io/component: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "rsshub.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: redis
+  template:
+    metadata:
+      labels:
+        {{- include "rsshub.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/component: redis
+    spec:
+      containers:
         - name: redis
           image: "{{ .Values.redis.image }}:{{ .Values.redis.tag }}"
           imagePullPolicy: IfNotPresent

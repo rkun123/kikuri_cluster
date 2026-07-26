@@ -20,7 +20,7 @@ env:
   CACHE_TYPE: redis
   CACHE_EXPIRE: "300"
   CACHE_CONTENT_EXPIRE: "3600"
-  REDIS_URL: redis://localhost:6379/
+  REDIS_URL: redis://rsshub-redis:6379/
 
 redis:
   image: redis
