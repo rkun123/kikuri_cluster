@@ -5,21 +5,25 @@ namespace: rsshub
 destination:
   server: https://kubernetes.default.svc
 
+labels:
+  app: rsshub
+
 source:
-  repoURL: https://naturalselectionlabs.github.io/helm-charts
-  chart: rsshub
-  targetRevision: 0.2.9
-  helm:
-    valuesObject:
-      # RSSHub の設定
-      env:
-        NODE_ENV: production
-        CACHE_TYPE: redis
-        CACHE_EXPIRE: "300"
-        CACHE_CONTENT_EXPIRE: "3600"
-      # Redis を有効化
-      redis:
-        enabled: true
-      # Puppeteer (ブラウザレンダリング) を有効化
-      puppeteer:
-        enabled: true
+  image: diygod/rsshub
+  # renovate: datasource=docker depName=diygod/rsshub
+  tag: "latest"
+  port: 1200
+
+env:
+  TZ: Asia/Tokyo
+  NODE_ENV: production
+  CACHE_TYPE: redis
+  CACHE_EXPIRE: "300"
+  CACHE_CONTENT_EXPIRE: "3600"
+  REDIS_URL: redis://rsshub-redis:6379/
+
+redis:
+  image: redis
+  # renovate: datasource=docker depName=redis
+  tag: "7-alpine"
+  port: 6379
