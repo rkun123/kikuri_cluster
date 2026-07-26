@@ -42,3 +42,8 @@ applications:
     tool:
       helm:
         releaseName: miniflux
+  - name: rsshub
+    path: argocd/applications/rsshub/
+    tool:
+      helm:
+        releaseName: rsshub
