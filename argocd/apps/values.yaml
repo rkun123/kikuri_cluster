@@ -47,3 +47,10 @@ applications:
     tool:
       helm:
         releaseName: rsshub
+
+  - name: kikuri
+    namespace: argocd
+    path: charts/kikuri/
+    tool:
+      helm:
+        releaseName: argocd
