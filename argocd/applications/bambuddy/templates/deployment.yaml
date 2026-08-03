@@ -18,6 +18,7 @@ spec:
         {{- include "bambuddy.selectorLabels" . | nindent 8 }}
     spec:
       hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.source.image }}:{{ .Values.source.tag }}"
