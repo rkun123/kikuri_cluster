@@ -11,7 +11,7 @@ labels:
 source:
   image: ghcr.io/maziggy/bambuddy
   # renovate: datasource=docker depName=ghcr.io/maziggy/bambuddy
-  tag: "1.2.5.1"
+  tag: "1.2.5.2"
 
 # docker-compose.yml の構成を再現するための環境変数
 env:
