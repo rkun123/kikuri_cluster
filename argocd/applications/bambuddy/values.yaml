@@ -47,5 +47,5 @@ pvc_logs:
 bambu_studio_api:
   image: ghcr.io/maziggy/bambu-studio-api
   # renovate: datasource=docker depName=ghcr.io/maziggy/bambu-studio-api
-  tag: "bambuddy-1.2.5.1"
+  tag: "bambuddy-1.2.5.2"
   port: 3000
