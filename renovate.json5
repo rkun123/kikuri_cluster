@@ -4,18 +4,15 @@
   ],
   "dependencyDashboard": true,
   "prCreation": "immediate",
-  "username": "renovate-release",
   "gitAuthor": "Renovate Bot <bot@renovateapp.com>",
-  "repositories": [
-    "rkun123/kikuri_cluster"
-  ],
   "customManagers": [
     {
       "customType": "regex",
-      "managerFilePatterns": ["(^|/)values\\.yaml$"],
+      "fileMatch": ["(^|/)values\\.yaml$"],
       "matchStrings": [
-        "# renovate: datasource=(?<datasource>[a-z-]+?) depName=(?<depName>[^\\s]+?)(?: packageName=(?<packageName>[^\\s]+?))?\\s*\\n\\s*.*?tag:\\s*(?<currentValue>[\"']?[^\"'\\s]+[\"']?)"
-      ]
+        "# renovate: datasource=(?<datasource>[a-z-]+?) depName=(?<depName>[^\\s]+?)(?: packageName=(?<packageName>[^\\s]+?))?\\s*\\n\\s*.*?tag:\\s*[\"']?(?<currentValue>[^\"'\\s]+)[\"']?"
+      ],
+      "datasourceTemplate": "docker"
     }
   ],
   "packageRules": [
@@ -25,11 +22,19 @@
     },
     {
       "matchPackageNames": ["ghcr.io/maziggy/bambuddy"],
-      "versioning": "semver"
+      "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)\\.(?<build>\\d+)$"
     },
     {
       "matchPackageNames": ["ghcr.io/maziggy/bambu-studio-api"],
-      "versioning": "regex:^bambuddy-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
+      "versioning": "regex:^bambuddy-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)\\.(?<build>\\d+)$"
+    },
+    {
+      "matchPackageNames": ["diygod/rsshub"],
+      "versioning": "regex:^(?<major>\\d{4})\\.(?<minor>\\d{2})\\.(?<patch>\\d{2})$"
+    },
+    {
+      "matchPackageNames": ["redis"],
+      "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-alpine$"
     }
   ]
 }
