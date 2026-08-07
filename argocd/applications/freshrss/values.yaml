@@ -10,6 +10,7 @@ labels:
 
 source:
   image: freshrss/freshrss
+  # renovate: datasource=docker depName=freshrss/freshrss
   tag: 1.27.0
   path: .
   chart: nfs-subdir-external-provisioner

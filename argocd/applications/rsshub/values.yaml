@@ -11,7 +11,7 @@ labels:
 source:
   image: diygod/rsshub
   # renovate: datasource=docker depName=diygod/rsshub
-  tag: "latest"
+  tag: "2026-08-06"
   port: 1200
 
 env:
@@ -25,5 +25,5 @@ env:
 redis:
   image: redis
   # renovate: datasource=docker depName=redis
-  tag: "7-alpine"
+  tag: "7.4.10-alpine"
   port: 6379
