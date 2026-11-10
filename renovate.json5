@@ -8,7 +8,7 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": ["(^|/)values\\.yaml$"],
+      "managerFilePatterns": ["/(^|/)values\\.yaml$/"],
       "matchStrings": [
         "# renovate: datasource=(?<datasource>[a-z-]+?) depName=(?<depName>[^\\s]+?)(?: packageName=(?<packageName>[^\\s]+?))?\\s*\\n\\s*.*?tag:\\s*[\"']?(?<currentValue>[^\"'\\s]+)[\"']?"
       ],
